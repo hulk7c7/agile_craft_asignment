@@ -1,9 +1,9 @@
+import 'package:agile_craft_asignment/presentation/home/models/product_model.dart';
 import 'package:agile_craft_asignment/utils/globalFunctions.dart';
 import 'package:hive/hive.dart';
 
 class SetUserLocalStorageV2 {
   final box = Hive.box(UserStorageKey.mainBox);
-  //final box2 = Hive.box(UserStorageKey.affiliationAnalytics);
 
   storingDataInBox(String key, dynamic v) {
     try {
@@ -24,7 +24,7 @@ class SetUserLocalStorageV2 {
   void refreshToken(String? value) =>
       storingDataInBox(UserStorageKey.refreshToken, value);
 
-  void products(String? value) =>
+  void products(List<Products>? value) =>
       storingDataInBox(UserStorageKey.products, value);
 
 
@@ -52,7 +52,7 @@ class GetUserLocalStorageV2 {
 
   String? refreshToken() => box.get(UserStorageKey.refreshToken);
 
-  String? products() => box.get(UserStorageKey.products);
+  List<Products>? products() => box.get(UserStorageKey.products);
 
 }
 
