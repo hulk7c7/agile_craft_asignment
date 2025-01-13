@@ -18,66 +18,23 @@ class SetUserLocalStorageV2 {
 
   void userId(String? value) => storingDataInBox(UserStorageKey.userId, value);
 
-  void userNumber(String? value) =>
-      storingDataInBox(UserStorageKey.userNumber, value);
+  void accessToken(String? value) =>
+      storingDataInBox(UserStorageKey.accessToken, value);
 
-  void userEmail(String? value) =>
-      storingDataInBox(UserStorageKey.userEmail, value);
+  void refreshToken(String? value) =>
+      storingDataInBox(UserStorageKey.refreshToken, value);
 
-  void userName(String? value) =>
-      storingDataInBox(UserStorageKey.userName, value);
-
-  void userPhoto(String value) =>
-      storingDataInBox(UserStorageKey.userPhoto, value);
-
-  void isVerified(String value) =>
-      storingDataInBox(UserStorageKey.isVerified, value);
-
-  void lastUpdated(String value) =>
-      storingDataInBox(UserStorageKey.lastUpdated, value);
-
-  void userGender(String value) =>
-      storingDataInBox(UserStorageKey.userGender, value);
-
-  void lastLogin(String value) =>
-      storingDataInBox(UserStorageKey.lastLogin, value);
-
-  void userThana(String value) =>
-      storingDataInBox(UserStorageKey.userThana, value);
-
-  void userAddress(String value) =>
-      storingDataInBox(UserStorageKey.userAddress, value);
-
-  void isActive(String value) =>
-      storingDataInBox(UserStorageKey.isActive, value);
-
-  void isBloodDooner(String value) =>
-      storingDataInBox(UserStorageKey.isBloodDooner, value);
-
-  void isSearchingBlood(String value) =>
-      storingDataInBox(UserStorageKey.isSearchingBlood, value);
-
-  void isLFToday(String value) =>
-      storingDataInBox(UserStorageKey.isLFToday, value);
+  void products(String? value) =>
+      storingDataInBox(UserStorageKey.products, value);
 
 
   void clearUser() {
     box.delete(UserStorageKey.isLogin);
     box.delete(UserStorageKey.userId);
-    box.delete(UserStorageKey.userNumber);
-    box.delete(UserStorageKey.userEmail);
-    box.delete(UserStorageKey.userName);
-    box.delete(UserStorageKey.userPhoto);
-    box.delete(UserStorageKey.isVerified);
-    box.delete(UserStorageKey.lastUpdated);
-    box.delete(UserStorageKey.userGender);
-    box.delete(UserStorageKey.lastLogin);
-    box.delete(UserStorageKey.userThana);
-    box.delete(UserStorageKey.userAddress);
-    box.delete(UserStorageKey.isActive);
-    box.delete(UserStorageKey.isBloodDooner);
-    box.delete(UserStorageKey.isSearchingBlood);
-    box.delete(UserStorageKey.isLFToday);
+    box.delete(UserStorageKey.accessToken);
+    box.delete(UserStorageKey.refreshToken);
+    box.delete(UserStorageKey.products);
+
   }
 
   void clear() => box.clear();
@@ -89,36 +46,13 @@ class GetUserLocalStorageV2 {
 
   String? isLogin() => box.get(UserStorageKey.isLogin);
 
-  String? userPhoto() => box.get(UserStorageKey.userPhoto);
+  String? accessToken() => box.get(UserStorageKey.accessToken);
 
   String? userId() => box.get(UserStorageKey.userId);
 
-  String? isVerified() => box.get(UserStorageKey.isVerified);
+  String? refreshToken() => box.get(UserStorageKey.refreshToken);
 
-  String? userNumber() => box.get(UserStorageKey.userNumber);
-
-  String? userEmail() => box.get(UserStorageKey.userEmail);
-
-  String? userName() => box.get(UserStorageKey.userName);
-
-  String? lastUpdated() => box.get(UserStorageKey.lastUpdated);
-
-  String? userGender() => box.get(UserStorageKey.userGender);
-
-  String? lastLogin() => box.get(UserStorageKey.lastLogin);
-
-  String? userThana() => box.get(UserStorageKey.userThana);
-
-  String? userAddress() => box.get(UserStorageKey.userAddress);
-
-  String? isActive() => box.get(UserStorageKey.isActive);
-
-  String? isBloodDooner() => box.get(UserStorageKey.isBloodDooner);
-
-  String? isSearchingBlood() => box.get(UserStorageKey.isSearchingBlood);
-
-  String? isLFToday() => box.get(UserStorageKey.isLFToday);
-
+  String? products() => box.get(UserStorageKey.products);
 
 }
 
@@ -129,32 +63,10 @@ class UserStorageKey {
 
   static String get userId => "userId";
 
-  static String get userNumber => "userNumber";
+  static String get accessToken => "accessToken";
 
-  static String get userEmail => "userEmail";
+  static String get refreshToken => "refreshToken";
 
-  static String get userName => "userName";
-
-  static String get userPhoto => "userPhoto";
-
-  static String get isVerified => "isVerified";
-
-  static String get lastUpdated => "lastUpdated";
-
-  static String get userGender => "userGender";
-
-  static String get lastLogin => "lastLogin";
-
-  static String get userThana => "userThana";
-
-  static String get userAddress => "userAddress";
-
-  static String get isActive => "isActive";
-
-  static String get isBloodDooner => "isBloodDooner";
-
-  static String get isSearchingBlood => "isSearchingBlood";
-
-  static String get isLFToday => "isLFToday";
+  static String get products => "products";
 
 }
