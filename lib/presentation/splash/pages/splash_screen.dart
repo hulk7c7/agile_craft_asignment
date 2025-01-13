@@ -1,4 +1,6 @@
+import 'package:agile_craft_asignment/backend/localDB/localStorage.dart';
 import 'package:agile_craft_asignment/presentation/authentication/pages/login_screen.dart';
+import 'package:agile_craft_asignment/presentation/home/pages/displayProducts.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -36,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Authentication()),  // Replace HomeScreen with your next screen
+        MaterialPageRoute(builder: (context) => (GetUserLocalStorageV2().isLogin() == true) ? ProductShowcase() : Authentication()),  // Replace HomeScreen with your next screen
       );
     });
   }

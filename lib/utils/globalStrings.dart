@@ -9,9 +9,11 @@ abstract class GlobalStrings {
   };
 
  static dynamic header = {
+   'Content-Type': 'application/json',
    'Abp.TenantId': '10',
    'Authorization': 'Bearer ${GetUserLocalStorageV2().accessToken()}',
  };
+
 
 
 

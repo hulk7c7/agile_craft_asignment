@@ -122,6 +122,7 @@ class Authentication extends HookConsumerWidget {
                     if (user != null && user?['success']) {
                       Auth auth = Auth.fromJson(user!);
                       SetUserLocalStorageV2().userId(auth.result.userId.toString());
+                      SetUserLocalStorageV2().isLogin(true);
                       SetUserLocalStorageV2().accessToken(auth.result.accessToken.toString());
                       SetUserLocalStorageV2().refreshToken(auth.result.refreshToken.toString());
 

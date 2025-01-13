@@ -14,7 +14,7 @@ class SetUserLocalStorageV2 {
     }
   }
 
-  void isLogin(String value) => storingDataInBox(UserStorageKey.isLogin, value);
+  void isLogin(bool value) => storingDataInBox(UserStorageKey.isLogin, value);
 
   void userId(String? value) => storingDataInBox(UserStorageKey.userId, value);
 
@@ -44,7 +44,7 @@ class GetUserLocalStorageV2 {
   final box = Hive.box(UserStorageKey.mainBox);
   //final box2 = Hive.box(UserStorageKey.affiliationAnalytics);
 
-  String? isLogin() => box.get(UserStorageKey.isLogin);
+  bool? isLogin() => box.get(UserStorageKey.isLogin);
 
   String? accessToken() => box.get(UserStorageKey.accessToken);
 
