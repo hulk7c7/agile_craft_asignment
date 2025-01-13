@@ -4,6 +4,7 @@ import 'package:agile_craft_asignment/utils/globalFunctions.dart';
 abstract class GlobalStrings {
 
  static dynamic loginHeader = {
+    'Content-Type': 'application/json',
     'Abp.TenantId': '10'
   };
 
