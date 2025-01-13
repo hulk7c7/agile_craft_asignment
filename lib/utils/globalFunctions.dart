@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class GlobalFunctions {
 
@@ -15,6 +16,10 @@ abstract class GlobalFunctions {
 
   static void errorPrint(dynamic object) {
     log("", error: '\x1b[41m' + '\x1b[47m' + ' [Error] : $object ' + '\x1b[0m');
+  }
+
+  static Size getSize(BuildContext context) {
+    return MediaQuery.of(context).size;
   }
 
 }

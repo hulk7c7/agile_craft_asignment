@@ -1,17 +1,21 @@
-
-
+import 'package:agile_craft_asignment/utils/globalFunctions.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 class Authentication extends HookConsumerWidget {
-  const Authentication({super.key});
+  const Authentication({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    
+    final Size size = GlobalFunctions.getSize(context);
+
+    final email = useState("");
+    final pass = useState("");
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -21,24 +25,23 @@ class Authentication extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Welcome Back!',
+                'Great To See You!',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: size.height * 0.04,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+                  color: Colors.green,
                 ),
               ),
               SizedBox(height: 20),
               Text(
-                'Login to continue',
+                'Sign in to continue',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: size.height * 0.017,
                   color: Colors.grey[600],
                 ),
               ),
               SizedBox(height: 40),
-              TextField(
-                controller: emailController,
+              TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: 'Email',
@@ -47,10 +50,12 @@ class Authentication extends HookConsumerWidget {
                   ),
                   prefixIcon: Icon(Icons.email),
                 ),
+                onChanged: (value){
+                  email.value = value;
+                },
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: passwordController,
+              TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
@@ -59,6 +64,9 @@ class Authentication extends HookConsumerWidget {
                   ),
                   prefixIcon: Icon(Icons.lock),
                 ),
+                onChanged: (value){
+                  pass.value = value;
+                },
               ),
               SizedBox(height: 30),
               SizedBox(
@@ -66,34 +74,21 @@ class Authentication extends HookConsumerWidget {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    String email = emailController.text;
-                    String password = passwordController.text;
-                    // Handle login logic here
-                    print('Email: $email, Password: $password');
+                    print('Email: ${email.value}, Password: ${pass.value}');
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: Colors.green,
                   ),
                   child: Text(
-                    'Login',
+                    'Sign In',
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
               ),
               SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  // Handle forgot password logic here
-                  print('Forgot Password?');
-                },
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: Colors.blueAccent),
-                ),
-              ),
             ],
           ),
         ),
