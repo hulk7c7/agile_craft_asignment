@@ -26,6 +26,33 @@ Widget customTextFormField({
   );
 }
 
+Widget customTextFormField2({
+  required String labelText,
+  required IconData prefixIcon,
+  int maxLines = 1,
+  TextInputType keyboardType = TextInputType.text,
+  required Function(String) onChanged,
+  double borderRadius = 10.0,
+  bool obscureText = false,
+  TextEditingController? controller,
+  bool enabled = true,
+}) {
+  return TextFormField(
+    enabled: enabled,
+    controller: controller,
+    maxLines: maxLines,
+    keyboardType: keyboardType,
+    decoration: InputDecoration(
+      labelText: labelText,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      prefixIcon: Icon(prefixIcon),
+    ),
+    onChanged: onChanged,
+  );
+}
+
 
 Widget customElevatedButton({
   required String text,

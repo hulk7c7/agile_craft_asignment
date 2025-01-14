@@ -1,6 +1,11 @@
 
 
+import 'package:agile_craft_asignment/backend/network/api_urls.dart';
+import 'package:agile_craft_asignment/backend/network/request_methods.dart';
+import 'package:agile_craft_asignment/presentation/home/pages/displayProducts.dart';
+import 'package:agile_craft_asignment/utils/globalStrings.dart';
 import 'package:agile_craft_asignment/utils/globalWidgets.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -12,6 +17,9 @@ class AddProductScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSwitched = useState(false);
+    final id = useState("");
+    final name = useState("");
+    final description = useState("");
 
     return SafeArea(
         child: Scaffold(
@@ -37,7 +45,7 @@ class AddProductScreen extends HookConsumerWidget {
               prefixIcon: Icons.dashboard_outlined,
               keyboardType: TextInputType.number,
               onChanged: (String v) {
-
+                id.value = v;
               },
             ),
             SizedBox(height: 20),
@@ -61,7 +69,7 @@ class AddProductScreen extends HookConsumerWidget {
               labelText: 'Name',
               prefixIcon: Icons.person_2_outlined,
               onChanged: (String v) {
-
+                name.value = v;
               },
             ),
             SizedBox(height: 20),
@@ -70,14 +78,36 @@ class AddProductScreen extends HookConsumerWidget {
               labelText: 'Description',
               prefixIcon: Icons.details_sharp,
               onChanged: (String v) {
-
+                description.value = v;
               },
             ),
             SizedBox(height: 40),
             //(isLoading.value) ?
             customElevatedButton(
                 text: 'Add Product',
-                onPressed: () {
+                onPressed: () async{
+                 await ApiService().postRequest(
+                      targetUrl: APIUrls.addProduct,
+                      context: context,
+                      headers: GlobalStrings.header,
+                      statusCode: 200,
+                      body: {
+                        "tenantId": 10,
+                        "name": name.value,
+                        "description": description.value,
+                        "isAvailable": isSwitched.value,
+                        "id": id.value
+                      },
+                  ).then((onValue) async{
+                    print(onValue);
+                    showCustomSnackBar(
+                      context: context,
+                      title: 'New Product Added!',
+                      message: "Your new product is now live.",
+                      contentType: ContentType.success,
+                    );
+                    Navigator.pop(context);
+                  });
 
              }),
                 //:

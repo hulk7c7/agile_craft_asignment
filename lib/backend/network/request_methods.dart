@@ -70,7 +70,8 @@ class ApiService {
         } else {
           print('Response body is empty.');
         }
-      } else {
+      }
+      else {
         print('Failed with status code: ${response.statusCode}');
         print('Response body: ${response.body}');
         if(purpose=="login") {
@@ -89,22 +90,50 @@ class ApiService {
   }
 
 
-  Future<Map<String, dynamic>?> putRequest({
+  Future<Map<String, dynamic>?> patchRequest({
     required String targetUrl,
     Map<String, String>? headers,
     Map<String, dynamic>? body,
+    int? statusCode,
+    required BuildContext context,
+    String? purpose
   }) async {
     try {
       final uri = Uri.parse('$targetUrl');
-      final response = await http.put(
+      print(targetUrl);
+      print(headers);
+      print(body);
+      final response = await http.post(
         uri,
         headers: headers,
-        body: body != null ? jsonEncode(body) : null,
+        body: jsonEncode(body),
       );
-      return jsonDecode(response.body);
+      // print('>>>>>>>>\n${response.statusCode}');
+      // print('n${response.body}');
+      if (response.statusCode == statusCode) {
+        if (response.body.isNotEmpty) {
+          final responseData = jsonDecode(response.body);
+          print('Response data: $responseData');
+          return jsonDecode(response.body);;
+        } else {
+          print('Response body is empty.');
+        }
+      }
+      else {
+        print('Failed with status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        if(purpose=="login") {
+          showCustomSnackBar(
+            context: context,
+            title: 'Unable to Sign In!',
+            message: "Please check your credentials again.",
+            contentType: ContentType.failure,
+          );
+        }
+      }
     } catch (e) {
-      SnackBar(content: Text('$e'));
-      throw Exception('Error in PUT request: $e');
+      SnackBar(content: Text('${e}'));
+      throw Exception('Error in POST request: $e');
     }
   }
 
