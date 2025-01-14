@@ -34,7 +34,6 @@ class SetUserLocalStorageV2 {
     box.delete(UserStorageKey.accessToken);
     box.delete(UserStorageKey.refreshToken);
     box.delete(UserStorageKey.products);
-
   }
 
   void clear() => box.clear();

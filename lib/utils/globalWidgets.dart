@@ -1,5 +1,7 @@
 
 
+import 'package:agile_craft_asignment/backend/localDB/localStorage.dart';
+import 'package:agile_craft_asignment/presentation/authentication/pages/login_screen.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 
@@ -108,4 +110,35 @@ void showCustomSnackBar({
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(snackBar);
+}
+
+
+void showLogoutDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Logout'),
+        content: Text('Are you sure you want to log out?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              SetUserLocalStorageV2().clearUser();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Authentication()),
+              );
+              print('Logged out');
+            },
+            child: Text('Yes'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('No'),
+          ),
+        ],
+      );
+    },
+  );
 }

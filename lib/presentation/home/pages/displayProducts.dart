@@ -8,6 +8,7 @@ import 'package:agile_craft_asignment/presentation/addProduct/pages/addProduct_s
 import 'package:agile_craft_asignment/presentation/home/models/product_model.dart';
 import 'package:agile_craft_asignment/presentation/updateProduct/pages/updateProduct_screen.dart';
 import 'package:agile_craft_asignment/utils/globalStrings.dart';
+import 'package:agile_craft_asignment/utils/globalWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -59,6 +60,15 @@ class ProductShowcase extends HookConsumerWidget {
             fontSize: 20,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout_outlined, color: Colors.black87,),
+            onPressed: () {
+              // Handle search button press
+              showLogoutDialog(context);
+            },
+          ),
+        ],
       ),
       backgroundColor: Color(0xFFffffff),
       floatingActionButton: FloatingActionButton(
