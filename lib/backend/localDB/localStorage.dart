@@ -24,7 +24,7 @@ class SetUserLocalStorageV2 {
   void refreshToken(String? value) =>
       storingDataInBox(UserStorageKey.refreshToken, value);
 
-  void products(List<Products>? value) =>
+  void products(ProductList? value) =>
       storingDataInBox(UserStorageKey.products, value);
 
 
@@ -51,7 +51,7 @@ class GetUserLocalStorageV2 {
 
   String? refreshToken() => box.get(UserStorageKey.refreshToken);
 
-  List<Products>? products() => box.get(UserStorageKey.products);
+  ProductList? products() => box.get(UserStorageKey.products);
 
 }
 
