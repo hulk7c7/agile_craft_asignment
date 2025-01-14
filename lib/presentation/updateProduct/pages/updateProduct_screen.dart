@@ -3,6 +3,7 @@
 import 'package:agile_craft_asignment/backend/network/api_urls.dart';
 import 'package:agile_craft_asignment/backend/network/request_methods.dart';
 import 'package:agile_craft_asignment/presentation/home/pages/displayProducts.dart';
+import 'package:agile_craft_asignment/utils/globalFunctions.dart';
 import 'package:agile_craft_asignment/utils/globalStrings.dart';
 import 'package:agile_craft_asignment/utils/globalWidgets.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
@@ -101,6 +102,9 @@ class UpdateProductScreen extends HookConsumerWidget {
                 customElevatedButton(
                     text: 'Update Product',
                     onPressed: () async{
+
+                      if(await GlobalFunctions.internetIsConnected(context) == false) return;
+
                       await ApiService().postRequest(
                         targetUrl: APIUrls.addProduct,
                         context: context,

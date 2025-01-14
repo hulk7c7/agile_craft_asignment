@@ -74,6 +74,9 @@ class Authentication extends HookConsumerWidget {
               customElevatedButton(
                   text: 'Sign In',
                   onPressed: () async{
+
+                    if(await GlobalFunctions.internetIsConnected(context) == false) return;
+
                     if(email.value.isEmpty || pass.value.isEmpty) {
                       showCustomSnackBar(
                         context: context,
