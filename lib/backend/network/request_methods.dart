@@ -1,4 +1,6 @@
 import 'package:agile_craft_asignment/backend/network/api_urls.dart';
+import 'package:agile_craft_asignment/presentation/home/models/product_model.dart';
+import 'package:agile_craft_asignment/utils/globalWidgets.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,19 +9,36 @@ import 'dart:convert';
 class ApiService {
 
 
-  Future<http.Response> getRequest({
+  Future<ProductList?> getRequest({
     required String targetUrl,
     Map<String, String>? headers,
     Map<String, String>? queryParameters,
+    int? statusCode = 200,
+    required BuildContext context,
+    String? purpose
   }) async {
     try {
       final uri = Uri.parse('$targetUrl').replace(queryParameters: queryParameters);
       final response = await http.get(uri, headers: headers);
-      return response;
+      if (response.statusCode == statusCode) {
+        if (response.body.isNotEmpty) {
+          final dynamic responseData = jsonDecode(response.body);
+          print('Response data: $responseData');
+          //return jsonDecode(response.body);
+          return ProductList.fromJson(jsonDecode(response.body));
+        } else {
+          print('Response body is empty.');
+        }
+      } else {
+        print('Failed with status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        return null;
+      }
     } catch (e) {
       SnackBar(content: Text('$e'));
       throw Exception('Error in GET request: $e');
     }
+    return null;
   }
 
 
@@ -28,7 +47,8 @@ class ApiService {
     Map<String, String>? headers,
     Map<String, dynamic>? body,
     int? statusCode,
-    required BuildContext context
+    required BuildContext context,
+    String? purpose
   }) async {
     try {
       final uri = Uri.parse('$targetUrl');
@@ -53,21 +73,14 @@ class ApiService {
       } else {
         print('Failed with status code: ${response.statusCode}');
         print('Response body: ${response.body}');
-        const snackBar = SnackBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          behavior: SnackBarBehavior.floating,
-          content: AwesomeSnackbarContent(
+        if(purpose=="login") {
+          showCustomSnackBar(
+            context: context,
             title: 'Unable to Sign In!',
-            message:
-            'Please check your credentials again',
+            message: "Please check your credentials again.",
             contentType: ContentType.failure,
-            inMaterialBanner: true,
-          ),
-        );
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
+          );
+        }
       }
     } catch (e) {
       SnackBar(content: Text('${e}'));

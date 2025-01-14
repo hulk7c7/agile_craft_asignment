@@ -9,8 +9,8 @@ class SetUserLocalStorageV2 {
     try {
       box.put(key, v);
     } catch (e, err) {
-      GlobalFunctions.errorPrint("Got an error ==> $e");
-      GlobalFunctions.errorPrint('Error stack => $err');
+      GlobalFunctions.cPrint("Got an error ==> $e");
+      GlobalFunctions.cPrint('Error stack => $err');
     }
   }
 

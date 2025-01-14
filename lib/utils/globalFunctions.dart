@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 
 abstract class GlobalFunctions {
 
+  static bool willPrint = true;
+
   static Future<bool> internetIsConnected() async {
     final connectivityResult = await (Connectivity().checkConnectivity());
     bool connected =
@@ -14,9 +16,7 @@ abstract class GlobalFunctions {
     return connected;
   }
 
-  static void errorPrint(dynamic object) {
-    log("", error: '\x1b[41m' + '\x1b[47m' + ' [Error] : $object ' + '\x1b[0m');
-  }
+  static void cPrint(dynamic object) { if(willPrint) print(object); }
 
   static Size getSize(BuildContext context) {
     return MediaQuery.of(context).size;

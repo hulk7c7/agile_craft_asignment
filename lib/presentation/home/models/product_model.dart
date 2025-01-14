@@ -1,5 +1,23 @@
 import 'dart:convert';
 
+class ProductList {
+  final List<Products> products;
+
+  ProductList({required this.products});
+
+  // Factory method to create a ProductList from JSON
+  factory ProductList.fromJson(List<dynamic> json) {
+    return ProductList(
+      products: json.map((item) => Products.fromJson(item)).toList(),
+    );
+  }
+
+  // Method to convert a ProductList to JSON
+  List<Map<String, dynamic>> toJson() {
+    return products.map((product) => product.toJson()).toList();
+  }
+}
+
 class Products {
   final int tenantId;
   final String name;
