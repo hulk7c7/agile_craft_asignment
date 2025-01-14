@@ -25,6 +25,7 @@ Widget customTextFormField({
       prefixIcon: Icon(prefixIcon),
     ),
     onChanged: onChanged,
+    obscureText: obscureText,
   );
 }
 
